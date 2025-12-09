@@ -87,12 +87,22 @@ END;
 CREATE OR REPLACE TRIGGER trg_projet_before_insert
 BEFORE INSERT OR UPDATE ON PROJET
 FOR EACH ROW
+DECLARE
+  v_count NUMBER;
 BEGIN
   IF :NEW.budget <= 0 THEN
     RAISE_APPLICATION_ERROR(-20002, 'Budget doit être > 0');
   END IF;
   IF :NEW.date_fin < :NEW.date_debut THEN
     RAISE_APPLICATION_ERROR(-20003, 'Date fin doit être >= date début');
+  END IF;
+
+  SELECT COUNT(*) INTO v_count
+  FROM PROJET
+  WHERE id_chercheur_resp = :NEW.id_chercheur_resp;
+
+  IF v_count >= 3 THEN
+    RAISE_APPLICATION_ERROR(-20002, 'Ce chercheur dirige déjà 3 projets');
   END IF;
 END;
 /
