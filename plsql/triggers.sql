@@ -59,7 +59,7 @@ AFTER INSERT ON AFFECTATION_EQUIP
 FOR EACH ROW
 BEGIN
   UPDATE EQUIPEMENT
-  SET etat = 'En maintenance'
+  SET etat = 'Occupé'
   WHERE id_equipement = :NEW.id_equipement;
 END;
 /
