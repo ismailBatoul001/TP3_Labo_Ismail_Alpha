@@ -31,3 +31,19 @@ BEGIN
     ROLLBACK;
 END;
 /
+
+--Bloc de test pour la fonction calculer_duree_projet
+SET SERVEROUTPUT ON;
+
+DECLARE
+  v_id_projet NUMBER := 8101;
+  v_duree     NUMBER;
+BEGIN
+  INSERT INTO PROJET (id_projet, titre, domaine, budget, date_debut, date_fin, id_chercheur_resp)
+  VALUES (v_id_projet, 'Projet Durée', 'Chimie', 15000, SYSDATE, SYSDATE+45, 1);
+
+  v_duree := calculer_duree_projet(v_id_projet);
+
+  ROLLBACK;
+END;
+/
