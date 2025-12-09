@@ -12,3 +12,22 @@ BEGIN
   ROLLBACK;
 END;
 /
+
+--Bloc de test pour la procédure affecter_equipement
+SET SERVEROUTPUT ON;
+
+DECLARE
+  p_id_projet NUMBER := 7001;
+  p_id_equipement NUMBER := 5001;
+BEGIN
+    INSERT INTO PROJET (id_projet, titre, domaine, budget, date_debut, date_fin, id_chercheur_resp)
+    VALUES (p_id_projet, 'Projet Equipement Test', 'Physique', 20000, SYSDATE, SYSDATE+60, 9001);
+
+    INSERT INTO EQUIPEMENT (id_equipement, nom, categorie, date_acquisition, etat)
+    VALUES (p_id_equipement, 'Equipement Test', 'Aventure', SYSDATE, 'Disponible');
+
+    affecter_equipement(8001, p_id_projet, p_id_equipement, SYSDATE, 15);
+
+    ROLLBACK;
+END;
+/
