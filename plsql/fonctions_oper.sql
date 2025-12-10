@@ -69,3 +69,23 @@ EXCEPTION
     WHEN OTHERS THEN
         RAISE_APPLICATION_ERROR(-20999, 'Erreur verifier_disponibilite_equipement: ' || SQLERRM);
 END;
+
+CREATE OR REPLACE FUNCTION moyenne_mesures_experience(
+    p_id_exp IN NUMBER
+) RETURN NUMBER
+IS
+    v_moyenne NUMBER;
+BEGIN
+    SELECT AVG(mesure)
+    INTO v_moyenne
+    FROM ECHANTILLON
+    WHERE id_exp = p_id_exp;
+
+    RETURN v_moyenne;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        RETURN NULL;
+    WHEN OTHERS THEN
+        RAISE_APPLICATION_ERROR(-20022, 'Erreur moyenne_mesures_experience: ' || SQLERRM);
+END;
+/
