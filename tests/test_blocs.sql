@@ -64,4 +64,5 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Disponibilité avant affectation: ' || v_disponibilite);
 
     ROLLBACK;
-    END;
+END;
+/

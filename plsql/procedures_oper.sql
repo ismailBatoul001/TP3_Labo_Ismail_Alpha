@@ -1,4 +1,4 @@
-CREATE OR REPLACE PROCEDURE ajouter_projet (
+CREATE OR REPLACE PROCEDURE ajouter_projet(
   p_id_projet        IN NUMBER,
   p_titre            IN VARCHAR2,
   p_domaine          IN VARCHAR2,
@@ -30,10 +30,10 @@ EXCEPTION
   WHEN OTHERS THEN
     ROLLBACK;
     RAISE_APPLICATION_ERROR(-20999, 'Erreur de ajouter_projet: ' || SQLERRM);
-END;
+END ajouter_projet;
 /
 
-CREATE OR REPLACE PROCEDURE affecter_equipement (
+CREATE OR REPLACE PROCEDURE affecter_equipement(
     p_id_affect         IN NUMBER,
     p_id_projet         IN NUMBER,
     p_id_equipement     IN NUMBER,
@@ -59,6 +59,6 @@ EXCEPTION
   WHEN OTHERS THEN
     ROLLBACK;
     RAISE_APPLICATION_ERROR(-20999, 'Erreur affecter_equipement: ' || SQLERRM);
-END;
+END affecter_equipement;
 /
 
