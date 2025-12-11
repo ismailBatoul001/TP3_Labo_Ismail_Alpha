@@ -19,7 +19,8 @@ EXCEPTION
         RAISE_APPLICATION_ERROR(-20020, 'Projet inexistant');
     WHEN OTHERS THEN
         RAISE_APPLICATION_ERROR(-20999, 'Erreur calculer_duree_projet: ' || SQLERRM);
-END;
+END calculer_duree_projet;
+/
 
 CREATE OR REPLACE FUNCTION verifier_disponibilite_equipement(
     p_id_equipement IN NUMBER
@@ -68,8 +69,8 @@ EXCEPTION
         RAISE_APPLICATION_ERROR(-20021, 'Équipement inexistant');
     WHEN OTHERS THEN
         RAISE_APPLICATION_ERROR(-20999, 'Erreur verifier_disponibilite_equipement: ' || SQLERRM);
-END;
-
+END verifier_disponibilite_equipement;
+/
 CREATE OR REPLACE FUNCTION moyenne_mesures_experience(
     p_id_exp IN NUMBER
 ) RETURN NUMBER
