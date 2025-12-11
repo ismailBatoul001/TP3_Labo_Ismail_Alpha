@@ -126,7 +126,7 @@ EXCEPTION
     WHEN OTHERS THEN
         ROLLBACK;
         RAISE_APPLICATION_ERROR(-20041, 'Erreur planifier_experience: ' || SQLERRM);
-END;
+END planifier_experience;
 /
 
 
@@ -174,7 +174,7 @@ EXCEPTION
     WHEN OTHERS THEN
         ROLLBACK;
         RAISE_APPLICATION_ERROR(-20051, 'Erreur supprimer_projet: ' || SQLERRM);
-END;
+END supprimer_projet;
 /
 
 
@@ -203,6 +203,6 @@ EXCEPTION
     WHEN OTHERS THEN
         ROLLBACK;
         RAISE_APPLICATION_ERROR(-20030, 'Erreur journaliser_action: ' || SQLERRM);
-END;
+END journaliser_action;
 /
 

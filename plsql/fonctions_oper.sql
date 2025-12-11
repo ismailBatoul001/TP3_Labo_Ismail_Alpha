@@ -71,6 +71,7 @@ EXCEPTION
         RAISE_APPLICATION_ERROR(-20999, 'Erreur verifier_disponibilite_equipement: ' || SQLERRM);
 END verifier_disponibilite_equipement;
 /
+
 CREATE OR REPLACE FUNCTION moyenne_mesures_experience(
     p_id_exp IN NUMBER
 ) RETURN NUMBER
@@ -88,5 +89,5 @@ EXCEPTION
         RETURN NULL;
     WHEN OTHERS THEN
         RAISE_APPLICATION_ERROR(-20022, 'Erreur moyenne_mesures_experience: ' || SQLERRM);
-END;
+END moyenne_mesures_experience;
 /
