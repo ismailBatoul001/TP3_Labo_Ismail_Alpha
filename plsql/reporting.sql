@@ -78,7 +78,7 @@ BEGIN
 EXCEPTION
     WHEN OTHERS THEN
         RAISE_APPLICATION_ERROR(-20070, 'Erreur rapport_activite_projets: ' || SQLERRM);
-END;
+END rapport_activite_projets;
 /
 
 
@@ -122,8 +122,10 @@ BEGIN
 EXCEPTION
     WHEN OTHERS THEN
         RAISE_APPLICATION_ERROR(-20080, 'Erreur budget_moyen_par_domaine: ' || SQLERRM);
-END;
-/CREATE OR REPLACE PROCEDURE rapport_projets_par_chercheur(
+END budget_moyen_par_domaine;
+/
+
+CREATE OR REPLACE PROCEDURE rapport_projets_par_chercheur(
     p_id_chercheur IN NUMBER
 )
 IS
