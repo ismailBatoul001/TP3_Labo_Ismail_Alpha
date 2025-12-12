@@ -42,7 +42,7 @@ CREATE OR REPLACE PROCEDURE affecter_equipement(
 ) IS
 BEGIN
     v_disponible := verifier_disponibilite_equipement(p_id_equipement);
-    IF v_disponible = FALSE THEN
+    IF v_disponible = 0 THEN
         RAISE_APPLICATION_ERROR(-20010, 'Équipement non disponible' || SQLERRM);
     END IF;
 
