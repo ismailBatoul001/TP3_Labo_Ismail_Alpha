@@ -180,23 +180,26 @@ CREATE OR REPLACE PROCEDURE journaliser_action (
     p_operation       IN VARCHAR2,
     p_description     IN VARCHAR2 DEFAULT NULL
 ) IS
+    v_new_id NUMBER;
 BEGIN
+    SELECT COUNT(*) + 1
+    INTO v_new_id
+    FROM LOG_OPERATION;
+
     INSERT INTO LOG_OPERATION (
+        id_log,
         table_concernee,
         operation,
         utilisateur,
         date_op,
         description
     ) VALUES (
+        v_new_id,
         p_table_concernee,
         p_operation,
         USER,
         SYSDATE,
         p_description
     );
-EXCEPTION
-    WHEN OTHERS THEN
-        RAISE_APPLICATION_ERROR(-20030, 'Erreur journaliser_action: ' || SQLERRM);
 END journaliser_action;
 /
-
