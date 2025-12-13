@@ -78,7 +78,7 @@ BEGIN
   nom              VARCHAR2(100) NOT NULL,
   categorie        VARCHAR2(100) NOT NULL,
   date_acquisition DATE NOT NULL,
-  etat             VARCHAR2(100) DEFAULT ''Disponible'' NOT NULL
+  etat             VARCHAR2(100) DEFAULT ''Disponible'' NOT NULL,
 
   CONSTRAINT ck_equipement_etat CHECK (etat IN (''Disponible'', ''En maintenance'', ''Hors service''))
 )';
@@ -169,7 +169,6 @@ BEGIN
   mesure              NUMBER NOT NULL,
 
   CONSTRAINT ck_echantillon_mesure CHECK (mesure >= 0),
-  CONSTRAINT ck_echantillon_type CHECK (type_echantillon IS NOT NULL),
   CONSTRAINT fk_echantillon_experience FOREIGN KEY (id_exp) REFERENCES EXPERIENCE(id_exp)
 )';
 EXCEPTION

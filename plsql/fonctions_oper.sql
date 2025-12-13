@@ -9,7 +9,7 @@ BEGIN
     SELECT date_debut, date_fin
     INTO v_date_debut, v_date_fin
     FROM PROJET
-    WHERE id_projet = p_id_projet
+    WHERE id_projet = p_id_projet;
 
     v_duree := v_date_fin - v_date_debut;
 
@@ -36,7 +36,7 @@ IS
     TYPE affect_tab IS TABLE OF affect_rec;
     v_affectations affect_tab;
 
-    v_etat VARCHAR2;
+    v_etat VARCHAR2(50);
     v_dispo_return NUMBER := 1;
 BEGIN
     SELECT etat

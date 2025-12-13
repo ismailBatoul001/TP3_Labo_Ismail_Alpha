@@ -22,7 +22,6 @@ BEGIN
     p_date_debut, p_date_fin, p_id_chercheur_resp
   );
 
-  COMMIT;
 EXCEPTION
   WHEN DUP_VAL_ON_INDEX THEN
     ROLLBACK;
@@ -40,6 +39,7 @@ CREATE OR REPLACE PROCEDURE affecter_equipement(
     p_date_affectation  IN DATE,
     p_duree_jours       IN NUMBER
 ) IS
+    v_disponible NUMBER;
 BEGIN
     v_disponible := verifier_disponibilite_equipement(p_id_equipement);
     IF v_disponible = 0 THEN
@@ -50,7 +50,6 @@ BEGIN
         p_id_affect, p_id_projet, p_id_equipement,
         p_date_affectation, p_duree_jours
     );
-    COMMIT;
 EXCEPTION
   WHEN DUP_VAL_ON_INDEX THEN
     ROLLBACK;
@@ -121,7 +120,6 @@ BEGIN
         END;
     END IF;
 
-    COMMIT;
 EXCEPTION
     WHEN OTHERS THEN
         ROLLBACK;
@@ -167,7 +165,6 @@ BEGIN
 
     journaliser_action('PROJET', 'DELETE', 'Projet supprimé: ' || p_id_projet);
 
-    COMMIT;
     DBMS_OUTPUT.PUT_LINE('Projet ' || p_id_projet || ' supprimé avec succès');
 
 EXCEPTION
@@ -197,11 +194,8 @@ BEGIN
         SYSDATE,
         p_description
     );
-
-    COMMIT;
 EXCEPTION
     WHEN OTHERS THEN
-        ROLLBACK;
         RAISE_APPLICATION_ERROR(-20030, 'Erreur journaliser_action: ' || SQLERRM);
 END journaliser_action;
 /

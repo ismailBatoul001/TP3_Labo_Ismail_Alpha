@@ -2,12 +2,12 @@
 SET SERVEROUTPUT ON;
 
 DECLARE
-  v_id_chercheur NUMBER := 9001;
+  v_id_chercheur NUMBER := 9983;
 BEGIN
   INSERT INTO CHERCHEUR (id_chercheur, nom, prenom, specialite, date_embauche)
   VALUES (v_id_chercheur, 'BATOUL', 'ISMAIL', 'IA', SYSDATE);
 
-  ajouter_projet(7001, 'Projet Test', 'IA', 10000, SYSDATE, SYSDATE+30, v_id_chercheur);
+  ajouter_projet(7364, 'Projet Test', 'IA', 10000, SYSDATE, SYSDATE+30, v_id_chercheur);
   DBMS_OUTPUT.PUT_LINE('Projet ajouté avec succès.');
 
   ROLLBACK;
@@ -18,16 +18,19 @@ END;
 SET SERVEROUTPUT ON;
 
 DECLARE
-  p_id_projet NUMBER := 7001;
-  p_id_equipement NUMBER := 5001;
+  p_id_projet NUMBER := 8201;
+  p_id_equipement NUMBER := 6201;
 BEGIN
+    INSERT INTO CHERCHEUR (id_chercheur, nom, prenom, specialite, date_embauche)
+    VALUES (9001, 'BATOUL', 'ISMAIL', 'IA', SYSDATE);
+
     INSERT INTO PROJET (id_projet, titre, domaine, budget, date_debut, date_fin, id_chercheur_resp)
     VALUES (p_id_projet, 'Projet Equipement Test', 'Physique', 20000, SYSDATE, SYSDATE+60, 9001);
 
     INSERT INTO EQUIPEMENT (id_equipement, nom, categorie, date_acquisition, etat)
     VALUES (p_id_equipement, 'Equipement Test', 'Aventure', SYSDATE, 'Disponible');
 
-    affecter_equipement(8001, p_id_projet, p_id_equipement, SYSDATE, 15);
+    affecter_equipement(8201, p_id_projet, p_id_equipement, SYSDATE, 15);
     DBMS_OUTPUT.PUT_LINE('Affectation de l''équipement réussie.');
 
     ROLLBACK;
@@ -61,7 +64,11 @@ BEGIN
     VALUES (v_id_equipement, 'Equipement Disponibilité', 'Biotech', SYSDATE, 'Disponible');
 
     v_disponibilite := verifier_disponibilite_equipement(v_id_equipement);
-    DBMS_OUTPUT.PUT_LINE('Disponibilité avant affectation: ' || v_disponibilite);
+    IF v_disponibilite = 1 THEN
+      DBMS_OUTPUT.PUT_LINE('Disponibilité avant affectation: TRUE');
+    ELSE
+      DBMS_OUTPUT.PUT_LINE('Disponibilité avant affectation: FALSE');
+    END IF;
 
     ROLLBACK;
 END;
